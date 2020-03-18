@@ -2,6 +2,7 @@ out
 target
 backup
 demo
+*.txt
 !.mvn/wrapper/maven-wrapper.jar
 
 ### STS ###
