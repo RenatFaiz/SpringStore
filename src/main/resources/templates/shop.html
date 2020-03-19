@@ -16,7 +16,7 @@
 <body>
 
 <div class="container">
-<!--    <div th:replace="~{navigation :: navigation(Shop)}"></div>-->
+    <div th:replace="~{navigation :: navigation(Shop)}"></div>
     <h1>Shop</h1>
     <span th:if="${products.size() == 0}">Products list is empty</span>
     <!--    <span th:text="${prod.id + ' ' + prod.title + ' ' + prod.price + 'руб.'}"/>-->

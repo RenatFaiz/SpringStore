@@ -19,8 +19,8 @@ public class MainController {
     @GetMapping("/shop")
     public String toShop(Model model) {
         List<Product> allProducts = new ArrayList<>(5);
-        allProducts.add(new Product(0L, "Milk", 34));
-        allProducts.add(new Product(1L, "Bread", 41));
+        allProducts.add(new Product(1L, "Milk", 34));
+        allProducts.add(new Product(2L, "Bread", 41));
         model.addAttribute("products", allProducts);
         return "shop";
     }
