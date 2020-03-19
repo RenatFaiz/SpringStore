@@ -22,7 +22,6 @@ public class DefaultAuthenticationSuccessHandler
     protected Log logger = LogFactory.getLog(this.getClass());
 
     private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
-    private Role role;
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request,
@@ -71,7 +70,7 @@ public class DefaultAuthenticationSuccessHandler
         }
 
         if (isUser) {
-            return "/index";
+            return "/shop";
         } else if (isAdmin) {
             return "/dashboard";
         } else if (isSeller) {

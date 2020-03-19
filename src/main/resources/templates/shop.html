@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml" lang="en">
+
+<head>
+    <meta charset="utf-8"/>
+
+    <title>Spring Store</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+<div class="container">
+<!--    <div th:replace="~{navigation :: navigation(Shop)}"></div>-->
+    <h1>Shop</h1>
+    <span th:if="${products.size() == 0}">Products list is empty</span>
+    <!--    <span th:text="${prod.id + ' ' + prod.title + ' ' + prod.price + 'руб.'}"/>-->
+    <table th:if="${products.size() > 0}" class="table table-hover">
+        <thead class="thead-dark">
+        <tr>
+            <td>ID</td>
+            <td>Title</td>
+            <td>Price, руб.</td>
+            <td></td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="product : ${products}">
+            <td th:text="${product.id}"></td>
+            <td th:text="${product.title}"></td>
+            <td th:text="${product.price}"></td>
+            <!-- можно добавить в конец строки + ' руб.' -->
+            <td><a class="btn btn-secondary" th:href="@{'/details/' + ${product.id}}">Details</a></td>
+            <td><a class="btn btn-success" th:href="@{'/cart/add/' + ${product.id}}">Add to cart</a></td>
+            <td sec:authorize="hasRole('ADMIN')"><a class="btn btn-danger" th:href="@{'/products/remove/' + ${product.id}}">Delete</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
