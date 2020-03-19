@@ -1,5 +1,6 @@
-package cosmonaut.utils;
+package cosmonaut.util;
 
+import cosmonaut.entity.Role;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.security.core.Authentication;
@@ -21,6 +22,7 @@ public class DefaultAuthenticationSuccessHandler
     protected Log logger = LogFactory.getLog(this.getClass());
 
     private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
+    private Role role;
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request,
@@ -50,22 +52,30 @@ public class DefaultAuthenticationSuccessHandler
     protected String determineTargetUrl(Authentication authentication) {
         boolean isUser = false;
         boolean isAdmin = false;
+        boolean isSeller = false;
         Collection<? extends GrantedAuthority> authorities
                 = authentication.getAuthorities();
+        label:
         for (GrantedAuthority grantedAuthority : authorities) {
-            if (grantedAuthority.getAuthority().equals("ROLE_USER")) {
-                isUser = true;
-                break;
-            } else if (grantedAuthority.getAuthority().equals("ROLE_ADMIN")) {
-                isAdmin = true;
-                break;
+            switch (grantedAuthority.getAuthority()) {
+                case "ROLE_USER":
+                    isUser = true;
+                    break label;
+                case "ROLE_ADMIN":
+                    isAdmin = true;
+                    break label;
+                case "ROLE_SELLER":
+                    isSeller = true;
+                    break label;
             }
         }
 
         if (isUser) {
             return "/index";
         } else if (isAdmin) {
-            return "/index";
+            return "/dashboard";
+        } else if (isSeller) {
+            return "/orders";
         } else {
             throw new IllegalStateException();
         }
@@ -83,6 +93,7 @@ public class DefaultAuthenticationSuccessHandler
     public void setRedirectStrategy(RedirectStrategy redirectStrategy) {
         this.redirectStrategy = redirectStrategy;
     }
+
     protected RedirectStrategy getRedirectStrategy() {
         return redirectStrategy;
     }

@@ -1,6 +1,6 @@
 package cosmonaut.config;
 
-import cosmonaut.utils.DefaultAuthenticationSuccessHandler;
+import cosmonaut.util.DefaultAuthenticationSuccessHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,8 +10,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
-
-import javax.sql.DataSource;
 
 @Configuration
 @EnableWebSecurity
@@ -40,7 +38,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         auth.inMemoryAuthentication()
                 .withUser("user").password("{noop}pa").roles("USER")
                 .and()
-                .withUser("admin").password("{noop}pa").roles("ADMIN", "USER");
+                .withUser("admin").password("{noop}ad").roles("ADMIN")
+                .and()
+                .withUser("seller").password("{noop}se").roles("SELLER");
     }
 
     @Bean
