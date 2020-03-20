@@ -1,9 +1,15 @@
 package cosmonaut.controller;
 
 import cosmonaut.entity.Product;
+import cosmonaut.entity.User;
+import cosmonaut.repository.UserRepository;
+import cosmonaut.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,18 +17,27 @@ import java.util.List;
 @Controller
 public class MainController {
 
+    @Autowired
+    private UserRepository userRepository;
+
+    private UserService userService;
+
+    @Autowired
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
+
     @GetMapping("/index")
     public String toHomepage() {
         return "index";
     }
 
-    @GetMapping("/shop")
-    public String toShop(Model model) {
-        List<Product> allProducts = new ArrayList<>(5);
-        allProducts.add(new Product(1L, "Milk", 34));
-        allProducts.add(new Product(2L, "Bread", 41));
-        model.addAttribute("products", allProducts);
-        return "shop";
+
+
+    @RequestMapping("/users")
+    public String showAllUsers(Model model, Pageable pageable) {
+        model.addAttribute("users", userRepository.findAll(pageable));
+        return "user";
     }
 
 //    @GetMapping("/login")
