@@ -1,6 +1,5 @@
 package cosmonaut.util;
 
-import cosmonaut.entity.Role;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.security.core.Authentication;
@@ -72,7 +71,7 @@ public class DefaultAuthenticationSuccessHandler
         if (isUser) {
             return "/shop";
         } else if (isAdmin) {
-            return "/dashboard";
+            return "/shop";
         } else if (isSeller) {
             return "/orders";
         } else {

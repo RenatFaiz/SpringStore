@@ -17,22 +17,17 @@ import java.util.List;
 @Controller
 public class MainController {
 
-    @Autowired
     private UserRepository userRepository;
 
-    private UserService userService;
-
     @Autowired
-    public void setUserService(UserService userService) {
-        this.userService = userService;
+    public void setUserRepository(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
     @GetMapping("/index")
     public String toHomepage() {
         return "index";
     }
-
-
 
     @RequestMapping("/users")
     public String showAllUsers(Model model, Pageable pageable) {
