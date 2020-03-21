@@ -1,6 +1,7 @@
 package cosmonaut.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "orders")
@@ -10,6 +11,9 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
+
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    private List<OrderItem> orderItems;
 
     @ManyToOne
     @JoinColumn(name = "username")
@@ -32,5 +36,22 @@ public class Order {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public List<OrderItem> getOrderItems() {
+        return orderItems;
+    }
+
+    public void setOrderItems(List<OrderItem> orderItems) {
+        this.orderItems = orderItems;
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                ", orderItems=" + orderItems +
+                ", user=" + user.getUsername() +
+                '}';
     }
 }
