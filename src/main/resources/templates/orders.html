@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+
+<head>
+    <meta charset="utf-8"/>
+
+    <title>Spring Store Orders</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+<!-- Переделать!-->
+<div class="container">
+    <div th:replace="~{navigation :: navigation(Orders)}"></div>
+    <h1>Orders &#127811</h1>
+    <span th:if="${orders.size() == 0}">Cart is empty</span>
+    <table th:if="${orders.size() > 0}" class="table table-hover">
+        <thead class="thead-light">
+        <tr>
+            <th>ID</th>
+            <th>Customer</th>
+            <th>Order</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="order : ${orders}">
+            <td th:text="${order.id}"></td>
+            <td th:text="${order.user.username}"></td>
+            <td><a class="btn btn-secondary" th:href="@{'/orders/order-details/' + ${order.id}}">Details</a></td>
+            <td><a class="btn btn-danger" th:href="@{/products/remove/}">Cancel</a></td>
+        </tr>
+        </tbody>
+    </table>
+    <div sec:authorize="isAnonymous()" th:if="${orders.size()>0}">
+        <p>To make order, please, <a class="btn btn-success"
+                                     th:href="@{/login}">Login</a></p>
+    </div>
+    <!--    <a class="btn btn-success" sec:authorize="isAuthenticated()" th:if="${orders.size()>0}"-->
+    <!--       th:href="@{/cart/create_order}">Make order</a>-->
+</div>
+</body>
+</html>

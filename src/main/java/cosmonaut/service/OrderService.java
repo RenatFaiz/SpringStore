@@ -34,6 +34,10 @@ public class OrderService {
         return orderRepository.save(order);
     }
 
+    public Order getOrderById(Long id) {
+        return orderRepository.getOne(id);
+    }
+
     // TODO
     public void deleteOrderById() {
     }

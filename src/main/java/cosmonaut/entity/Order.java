@@ -48,10 +48,10 @@ public class Order {
 
     @Override
     public String toString() {
-        return "Order{" +
+        return "Order [" +
                 "id=" + id +
                 ", orderItems=" + orderItems +
                 ", user=" + user.getUsername() +
-                '}';
+                ']';
     }
 }

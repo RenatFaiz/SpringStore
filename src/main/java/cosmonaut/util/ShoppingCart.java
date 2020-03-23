@@ -15,6 +15,7 @@ public class ShoppingCart {
     public List<OrderItem> getOrderItems() {
         return orderItems;
     }
+
     @PostConstruct
     public void init() {
         orderItems = new ArrayList<>();
