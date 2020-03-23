@@ -22,19 +22,30 @@
         <tr>
             <th>Order ID</th>
             <th>Customer</th>
-            <th>Product cart</th>
-            <th></th>
+            <th>Product cart
+                <br>id, title, price (руб.)
+            </th>
         </tr>
         </thead>
         <tbody>
         <tr>
             <td th:text="${selectedOrder.id}"></td>
             <td th:text="${selectedOrder.user.username}"></td>
-            <td th:text="${selectedOrder.orderItems}"></td>
-            <td sec:authorize="hasRole('SELLER')"><a class="btn btn-danger" th:href="@{'/remove/'}">Cancel</a></td>
+            <td>
+                <table>
+                    <tr th:each="item : ${selectedOrder.orderItems}">
+                        <td th:text="${item.product.id}"></td>
+                        <td th:text="${item.product.title}"></td>
+                        <td th:text="${item.product.price}"></td>
+                    </tr>
+                </table>
+            </td>
         </tr>
         </tbody>
     </table>
+    <div sec:authorize="hasRole('SELLER')">
+        <a class="btn btn-danger" th:href="@{'/remove/'}">Cancel order</a>
+    </div>
 </div>
 </body>
 </html>
