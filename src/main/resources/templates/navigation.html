@@ -27,8 +27,8 @@
                 <li class="nav-item" th:classappend="${activeTab == 'Cart' ? 'active' : ''}">
                     <a class="nav-link" th:href="@{/cart}">Cart</a>
                 </li>
-                <li class="nav-item" sec:authorize="hasRole('ADMIN')">
-                    <a class="nav-link" th:href="@{/admin}">Dashboard</a>
+<!--                <li class="nav-item" sec:authorize="hasRole('ADMIN')">-->
+<!--                    <a class="nav-link" th:href="@{/admin}">Dashboard</a>-->
                 </li><li class="nav-item" sec:authorize="hasRole('SELLER')">
                     <a class="nav-link" th:href="@{/orders}">Orders</a>
                 </li>

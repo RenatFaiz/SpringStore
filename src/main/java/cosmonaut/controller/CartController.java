@@ -1,5 +1,8 @@
 package cosmonaut.controller;
 
+import cosmonaut.entity.Order;
+import cosmonaut.entity.OrderItem;
+import cosmonaut.entity.User;
 import cosmonaut.service.OrderService;
 import cosmonaut.service.UserService;
 import cosmonaut.util.ShoppingCart;
@@ -10,6 +13,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.security.Principal;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping("/cart")
@@ -47,5 +54,6 @@ public class CartController {
         cart.addProductById(id);
         return "redirect:/shop";
     }
+
 
 }

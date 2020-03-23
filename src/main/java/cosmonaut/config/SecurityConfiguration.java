@@ -11,37 +11,39 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
+import javax.sql.DataSource;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-//    private DataSource dataSource;
-//
-//    @Autowired
-//    public void setDataSource(DataSource dataSource) {
-//        this.dataSource = dataSource;
-//    }
-//
-//    @Override
-//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.jdbcAuthentication().dataSource(dataSource);
-//    }
-
-    @Bean("authenticationManager")
-    @Override
-    public AuthenticationManager authenticationManagerBean() throws Exception {
-        return super.authenticationManagerBean();
-    }
+    private DataSource dataSource;
 
     @Autowired
-    protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-                .withUser("user").password("{noop}us").roles("USER")
-                .and()
-                .withUser("admin").password("{noop}ad").roles("ADMIN")
-                .and()
-                .withUser("seller").password("{noop}se").roles("SELLER");
+    public void setDataSource(DataSource dataSource) {
+        this.dataSource = dataSource;
     }
+
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.jdbcAuthentication().dataSource(dataSource);
+    }
+
+//    @Bean("authenticationManager")
+//    @Override
+//    public AuthenticationManager authenticationManagerBean() throws Exception {
+//        return super.authenticationManagerBean();
+//    }
+
+//    @Autowired
+//    protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+//        auth.inMemoryAuthentication()
+//                .withUser("user").password("{noop}us").roles("USER")
+//                .and()
+//                .withUser("admin").password("{noop}ad").roles("ADMIN")
+//                .and()
+//                .withUser("seller").password("{noop}se").roles("SELLER");
+//    }
 
     @Bean
     public AuthenticationSuccessHandler authenticationSuccessHandler() {

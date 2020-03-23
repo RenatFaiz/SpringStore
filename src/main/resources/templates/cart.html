@@ -43,7 +43,7 @@
         <p>To make order, please, <a class="btn btn-success" th:href="@{/login}">Login</a></p>
     </div>
     <a class="btn btn-success" sec:authorize="isAuthenticated()" th:if="${orderItems.size() > 0}"
-       th:href="@{/cart/create_order}">Make order</a>
+       th:href="@{/orders/create_order}">Make order</a>
 </div>
 </body>
 </html>

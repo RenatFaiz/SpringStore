@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 @Service
 public class OrderService {
@@ -27,10 +28,13 @@ public class OrderService {
 
     public Order createOrderFromItems(User user, List<OrderItem> orderItems) {
         Order order = new Order();
-        //order.setOrderItems(new ArrayList<>());
-        order.setOrderItems(orderItems);
+        order.setOrderItems(new ArrayList<>());
         order.setUser(user);
-        //?
+        orderItems.stream().forEach(orderItem -> {
+            order.getOrderItems().add(orderItem);
+            orderItem.setOrder(order);
+        });
+        orderItems.clear();
         return orderRepository.save(order);
     }
 
@@ -38,6 +42,7 @@ public class OrderService {
     public Order getOrderById(Long id) {
         return orderRepository.getOne(id);
     }
+
 
     // TODO
     public void deleteOrderById() {
