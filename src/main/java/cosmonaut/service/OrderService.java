@@ -34,6 +34,7 @@ public class OrderService {
         return orderRepository.save(order);
     }
 
+    // getOne() ?
     public Order getOrderById(Long id) {
         return orderRepository.getOne(id);
     }
