@@ -1,7 +1,9 @@
 package cosmonaut.controller;
 
+import cosmonaut.entity.Authority;
 import cosmonaut.entity.Order;
 import cosmonaut.entity.User;
+import cosmonaut.service.AuthorityService;
 import cosmonaut.service.OrderService;
 import cosmonaut.service.UserService;
 import cosmonaut.util.ShoppingCart;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.security.Principal;
+import java.util.List;
 
 @Controller
 @RequestMapping("/orders")
@@ -29,22 +32,27 @@ public class OrderController {
     private ShoppingCart cart;
 
     @Autowired
+    private AuthorityService authService;
+
+    @Autowired
     public void setOrderService(OrderService orderService) {
         this.orderService = orderService;
     }
 
     @GetMapping("")
-    public String showOrders(Model model,
-                             Authentication authentication) {
-//        if(authentication.getAuthorities().contains("ROLE_USER")) {
-//            model.addAttribute("orders",
-//                    orderService.getOrders());
-//        }
-        User user = userService.findByUsername(authentication.getName());
-        model.addAttribute("user", user);
-
+    public String showOrders(Model model, Principal principal) {
+        User user = userService.findByUsername(principal.getName());
+        List<Authority> authorities = user.getAuthorities();
+        for (Authority authority : authorities) {
+            if (authority.getAuthority().equals("ROLE_SELLER")) {
+                model.addAttribute("orders",
+                        orderService.getOrders());
+                break;
+            }
+        }
         model.addAttribute("orders",
                 orderService.getOrderByUser(user));
+        model.addAttribute("user", user);
         return "orders";
 
 //        if(authority.getAuthority().equals("ROLE_USER")) {

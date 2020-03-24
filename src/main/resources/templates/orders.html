@@ -18,7 +18,7 @@
 <div class="container">
     <div th:replace="~{navigation :: navigation(Orders)}"></div>
     <h1>Orders &#127811</h1>
-    <span th:if="${orders.size() == 0}">No orders yet..</span>
+<!--    <span th:if="${orders.size() == 0}">No orders yet..</span>-->
     <table sec:authorize="hasAnyRole('USER', 'SELLER', 'ADMIN')" th:if="${orders.size() > 0}" class="table table-hover">
         <thead class="thead-light">
         <tr>
@@ -29,15 +29,17 @@
         </tr>
         </thead>
         <tbody>
-        <tr sec:authorize="hasRole('SELLER')" th:each="order : ${orders}">
+<!--        <tr sec:authorize="hasRole('SELLER')" th:each="order : ${orders}">-->
+<!--            <td th:text="${order.id}"></td>-->
+<!--            <td th:text="${order.user.username}"></td>-->
+<!--            <td><a class="btn btn-secondary" th:href="@{'/orders/order-details/' + ${order.id}}">Details</a></td>-->
+<!--            <td><a class="btn btn-danger" th:href="@{/products/remove/}">Cancel</a></td>-->
+<!--        </tr>-->
+<!--sec:authorize="hasRole('USER') or hasRole('ADMIN')"-->
+        <tr  th:each="order : ${orders}">
             <td th:text="${order.id}"></td>
             <td th:text="${order.user.username}"></td>
-            <td><a class="btn btn-secondary" th:href="@{'/orders/order-details/' + ${order.id}}">Details</a></td>
-            <td><a class="btn btn-danger" th:href="@{/products/remove/}">Cancel</a></td>
-        </tr><tr sec:authorize="hasRole('USER') or hasRole('ADMIN')" th:each="order : ${orders}">
-<!--            <td th:text="${principal.authorities}"></td>-->
-            <td th:text="${order.id}"></td>
-            <td th:text="${order.user.username}"></td>
+<!--            <td th:text="${auth}"></td>-->
             <td><a class="btn btn-secondary" th:href="@{'/orders/order-details/' + ${order.id}}">Details</a></td>
             <td><a class="btn btn-danger" th:href="@{/products/remove/}">Cancel</a></td>
         </tr>
