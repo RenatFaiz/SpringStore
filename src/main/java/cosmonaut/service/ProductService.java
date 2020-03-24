@@ -25,7 +25,10 @@ public class ProductService {
     }
 
     public Product getProductById(Long id) {
-        return productRepository.findById(id).orElseThrow();
+        if (productRepository.findById(id).isPresent()) {
+            return productRepository.findById(id).get();
+        }
+        return null;
     }
 
     public Product getProductByTitle(String title) {
@@ -36,7 +39,7 @@ public class ProductService {
         productRepository.deleteById(id);
     }
 
-    // может быть
+    //TODO может быть
     public void addProduct(Product product) {
         productRepository.save(product);
     }

@@ -29,7 +29,6 @@ public class OrderController {
     private ShoppingCart cart;
 
 
-
     @Autowired
     public void setOrderService(OrderService orderService) {
         this.orderService = orderService;
@@ -55,5 +54,11 @@ public class OrderController {
         User user = userService.findByUsername(principal.getName());
         Order orderFromItems = orderService.createOrderFromItems(user, cart.getOrderItems());
         return "redirect:order-details/" + orderFromItems.getId();
+    }
+
+    @GetMapping("/remove/{id}")
+    public String deleteOrderById(@PathVariable("id") Long id) {
+        orderService.deleteOrderById(id);
+        return "redirect:/orders";
     }
 }

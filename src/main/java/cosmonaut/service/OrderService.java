@@ -51,9 +51,8 @@ public class OrderService {
         return orderRepository.findAll();
     }
 
-    // TODO
-    public void deleteOrderById() {
-
+    public void deleteOrderById(Long id) {
+        orderRepository.deleteById(id);
     }
 
     public List<Order> getCustomOrders(Principal principal) {
