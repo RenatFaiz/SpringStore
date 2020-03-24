@@ -6,6 +6,8 @@ import cosmonaut.service.OrderService;
 import cosmonaut.service.UserService;
 import cosmonaut.util.ShoppingCart;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,12 +34,26 @@ public class OrderController {
     }
 
     @GetMapping("")
-    public String showOrders(Model model, Principal principal) {
+    public String showOrders(Model model,
+                             Authentication authentication) {
+//        if(authentication.getAuthorities().contains("ROLE_USER")) {
+//            model.addAttribute("orders",
+//                    orderService.getOrders());
+//        }
+        User user = userService.findByUsername(authentication.getName());
+        model.addAttribute("user", user);
+
         model.addAttribute("orders",
-                orderService.getOrders());
-        model.addAttribute("user",
-                userService.findByUsername(principal.getName()));
+                orderService.getOrderByUser(user));
         return "orders";
+
+//        if(authority.getAuthority().equals("ROLE_USER")) {
+//            model.addAttribute("orders",
+//                    orderService.getOrders());
+//        }
+//        model.addAttribute("user",
+//                userService.findByUsername(principal.getName()));
+//        return "orders";
     }
 
     @GetMapping("/order-details/{id}")

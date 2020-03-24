@@ -44,8 +44,8 @@ public class OrderService {
         return orderRepository.getOne(id);
     }
 
-    public List<Order> getOrderByUsername(String username) {
-        return orderRepository.findAllByUsername(username);
+    public List<Order> getOrderByUser(User user) {
+        return orderRepository.findAllByUser(user);
     }
 
     public List<Order> getOrders() {
