@@ -17,6 +17,9 @@ public class User {
     @Column(name = "enabled")
     private boolean enabled;
 
+    @OneToMany(mappedBy = "user")
+    private List<Authority> authorities;
+
     public User() {}
 
 
@@ -42,6 +45,14 @@ public class User {
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public List<Authority> getAuthorities() {
+        return authorities;
+    }
+
+    public void setAuthorities(List<Authority> authorities) {
+        this.authorities = authorities;
     }
 
     @Override

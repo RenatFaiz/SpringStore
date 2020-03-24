@@ -29,7 +29,8 @@
                 </li>
 <!--                <li class="nav-item" sec:authorize="hasRole('ADMIN')">-->
 <!--                    <a class="nav-link" th:href="@{/admin}">Dashboard</a>-->
-                </li><li class="nav-item" sec:authorize="hasRole('SELLER')">
+<!--                </li>-->
+                <li class="nav-item" sec:authorize="hasRole('SELLER') or hasRole('USER')">
                     <a class="nav-link" th:href="@{/orders}">Orders</a>
                 </li>
                 <li class="nav-item" sec:authorize="isAnonymous()">

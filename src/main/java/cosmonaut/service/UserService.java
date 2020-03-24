@@ -10,7 +10,8 @@ public class UserService {
 
     private UserRepository userRepository;
 
-    public UserService() {}
+    public UserService() {
+    }
 
     @Autowired
     public void setUserRepository(UserRepository userRepository) {
@@ -18,6 +19,9 @@ public class UserService {
     }
 
     public User findByUsername(String username) {
-        return userRepository.findById(username).orElseThrow();
+        if (userRepository.findById(username).isPresent()) {
+            return userRepository.findById(username).get();
+        }
+        return null;
     }
 }

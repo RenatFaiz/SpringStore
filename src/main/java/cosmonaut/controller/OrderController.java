@@ -32,9 +32,11 @@ public class OrderController {
     }
 
     @GetMapping("")
-    public String showOrders(Model model) {
+    public String showOrders(Model model, Principal principal) {
         model.addAttribute("orders",
-                orderService.getOrderRepository().findAll());
+                orderService.getOrders());
+        model.addAttribute("user",
+                userService.findByUsername(principal.getName()));
         return "orders";
     }
 

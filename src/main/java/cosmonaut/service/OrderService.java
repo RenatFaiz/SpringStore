@@ -7,6 +7,7 @@ import cosmonaut.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
@@ -43,6 +44,13 @@ public class OrderService {
         return orderRepository.getOne(id);
     }
 
+    public List<Order> getOrderByUsername(String username) {
+        return orderRepository.findAllByUsername(username);
+    }
+
+    public List<Order> getOrders() {
+        return orderRepository.findAll();
+    }
 
     // TODO
     public void deleteOrderById() {
