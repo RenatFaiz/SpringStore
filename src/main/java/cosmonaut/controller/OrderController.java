@@ -3,13 +3,10 @@ package cosmonaut.controller;
 import cosmonaut.entity.Authority;
 import cosmonaut.entity.Order;
 import cosmonaut.entity.User;
-import cosmonaut.service.AuthorityService;
 import cosmonaut.service.OrderService;
 import cosmonaut.service.UserService;
 import cosmonaut.util.ShoppingCart;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,8 +28,7 @@ public class OrderController {
     @Autowired
     private ShoppingCart cart;
 
-    @Autowired
-    private AuthorityService authService;
+
 
     @Autowired
     public void setOrderService(OrderService orderService) {
@@ -42,26 +38,9 @@ public class OrderController {
     @GetMapping("")
     public String showOrders(Model model, Principal principal) {
         User user = userService.findByUsername(principal.getName());
-        List<Authority> authorities = user.getAuthorities();
-        for (Authority authority : authorities) {
-            if (authority.getAuthority().equals("ROLE_SELLER")) {
-                model.addAttribute("orders",
-                        orderService.getOrders());
-                break;
-            }
-        }
-        model.addAttribute("orders",
-                orderService.getOrderByUser(user));
         model.addAttribute("user", user);
+        model.addAttribute("orders", orderService.getCustomOrders(principal));
         return "orders";
-
-//        if(authority.getAuthority().equals("ROLE_USER")) {
-//            model.addAttribute("orders",
-//                    orderService.getOrders());
-//        }
-//        model.addAttribute("user",
-//                userService.findByUsername(principal.getName()));
-//        return "orders";
     }
 
     @GetMapping("/order-details/{id}")

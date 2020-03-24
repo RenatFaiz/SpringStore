@@ -37,7 +37,7 @@
                     <a class="nav-link btn btn-success" th:href="@{/login}">Login</a>
                 </li>
                 <!--убираем избыточную проверку sec:authorize="isAuthenticated()"  -->
-                <li class="nav-item">
+                <li class="nav-item" sec:authorize="isAuthenticated()">
                     <form th:action="@{/logout}" method="post">
                         <input type="submit" class="btn btn-info" value="Logout"/>
                     </form>

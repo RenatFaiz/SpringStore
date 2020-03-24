@@ -1,5 +1,6 @@
 package cosmonaut.service;
 
+import cosmonaut.entity.Authority;
 import cosmonaut.entity.Order;
 import cosmonaut.entity.OrderItem;
 import cosmonaut.entity.User;
@@ -18,14 +19,13 @@ public class OrderService {
     private OrderRepository orderRepository;
 
     @Autowired
+    private UserService userService;
+
+    @Autowired
     public void setOrderRepository(OrderRepository orderRepository) {
         this.orderRepository = orderRepository;
     }
 
-    // удалить
-    public OrderRepository getOrderRepository() {
-        return orderRepository;
-    }
 
     public Order createOrderFromItems(User user, List<OrderItem> orderItems) {
         Order order = new Order();
@@ -39,7 +39,6 @@ public class OrderService {
         return orderRepository.save(order);
     }
 
-    // getOne() ?
     public Order getOrderById(Long id) {
         return orderRepository.getOne(id);
     }
@@ -48,12 +47,24 @@ public class OrderService {
         return orderRepository.findAllByUser(user);
     }
 
-    public List<Order> getOrders() {
+    public List<Order> getAllOrders() {
         return orderRepository.findAll();
     }
 
     // TODO
     public void deleteOrderById() {
+
+    }
+
+    public List<Order> getCustomOrders(Principal principal) {
+        User user = userService.findByUsername(principal.getName());
+        List<Authority> authorities = user.getAuthorities();
+        for (Authority authority : authorities) {
+            if (authority.getAuthority().equals("ROLE_SELLER")) {
+                return getAllOrders();
+            }
+        }
+        return getOrderByUser(user);
     }
 
 
