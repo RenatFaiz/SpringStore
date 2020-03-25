@@ -73,6 +73,18 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+<!--            <plugin>-->
+<!--                <groupId>com.heroku.sdk</groupId>-->
+<!--                <artifactId>heroku-maven-plugin</artifactId>-->
+<!--                <version>3.0.1</version>-->
+<!--                <configuration>-->
+<!--                    <appName>spring-store-tko</appName>-->
+<!--                    <jdkVersion>11</jdkVersion>-->
+<!--&lt;!&ndash;                    <includes>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <include>etc/readme.txt</include>&ndash;&gt;-->
+<!--&lt;!&ndash;                    </includes>&ndash;&gt;-->
+<!--                </configuration>-->
+<!--            </plugin>-->
         </plugins>
     </build>
 
