@@ -14,7 +14,7 @@
     <groupId>cosmonaut</groupId>
     <artifactId>tko-store</artifactId>
     <version>1.0</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

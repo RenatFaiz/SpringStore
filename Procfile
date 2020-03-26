@@ -1,0 +1,1 @@
+web: java -jar target/tko-store-1.0.jar
