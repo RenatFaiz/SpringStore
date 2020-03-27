@@ -1,1 +1,1 @@
-web: java -jar target/tko-store-1.0.jar --server.port=$PORT
+web: java -jar target/*.jar --server.port=$PORT
