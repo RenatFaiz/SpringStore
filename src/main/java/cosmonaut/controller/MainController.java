@@ -35,8 +35,8 @@ public class MainController {
         return "user";
     }
 
-//    @GetMapping("/login")
-//    public String toLoginPage() {
-//        return "login";
-//    }
+    @GetMapping("/login")
+    public String toLoginPage() {
+        return "login";
+    }
 }
