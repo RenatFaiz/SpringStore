@@ -22,12 +22,12 @@ public class OrderController {
 
     private UserService userService;
 
+    private ShoppingCart cart;
+
     @Autowired
     public void setUserService(UserService userService) {
         this.userService = userService;
     }
-
-    private ShoppingCart cart;
 
     @Autowired
     public void setCart(ShoppingCart cart) {

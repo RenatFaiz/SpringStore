@@ -24,7 +24,8 @@ public class DefaultAuthenticationSuccessHandler
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request,
-                                        HttpServletResponse response, Authentication authentication)
+                                        HttpServletResponse response,
+                                        Authentication authentication)
             throws IOException {
 
         handle(request, response, authentication);
@@ -32,7 +33,8 @@ public class DefaultAuthenticationSuccessHandler
     }
 
     protected void handle(HttpServletRequest request,
-                          HttpServletResponse response, Authentication authentication)
+                          HttpServletResponse response,
+                          Authentication authentication)
             throws IOException {
 
         String targetUrl = determineTargetUrl(authentication);
@@ -85,14 +87,5 @@ public class DefaultAuthenticationSuccessHandler
             return;
         }
         session.removeAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
-    }
-
-    // Эти методы под вопросом?
-    public void setRedirectStrategy(RedirectStrategy redirectStrategy) {
-        this.redirectStrategy = redirectStrategy;
-    }
-
-    protected RedirectStrategy getRedirectStrategy() {
-        return redirectStrategy;
     }
 }
