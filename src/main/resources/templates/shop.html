@@ -19,7 +19,6 @@
     <div th:replace="~{navigation :: navigation(Shop)}"></div>
     <h1>Shop</h1>
     <span th:if="${products.getSize() == 0}">Products list is empty</span>
-    <!--    <span th:text="${prod.id + ' ' + prod.title + ' ' + prod.price + 'руб.'}"/>-->
     <table th:if="${products.getSize() > 0}" class="table table-hover">
         <thead class="thead-dark">
         <tr>
@@ -34,10 +33,10 @@
             <td th:text="${product.id}"></td>
             <td th:text="${product.title}"></td>
             <td th:text="${product.price}"></td>
-            <!-- можно добавить в конец строки + ' руб.' -->
             <td><a class="btn btn-secondary" th:href="@{'/details/' + ${product.id}}">Details</a></td>
             <td><a class="btn btn-success" th:href="@{'/cart/add/' + ${product.id}}">Add to cart</a></td>
-            <td sec:authorize="hasRole('ADMIN')"><a class="btn btn-danger" th:href="@{'/remove/' + ${product.id}}">Delete</a></td>
+            <td sec:authorize="hasRole('ADMIN')"><a class="btn btn-danger" th:href="@{'/remove/' + ${product.id}}">Delete</a>
+            </td>
         </tr>
         </tbody>
     </table>
