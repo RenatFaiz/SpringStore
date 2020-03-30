@@ -9,9 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Controller
 public class ShopController {
 
@@ -24,9 +21,6 @@ public class ShopController {
 
     @GetMapping("/shop")
     public String toShop(Model model, Pageable pageable) {
-//        List<Product> allProducts = new ArrayList<>(5);
-//        allProducts.add(new Product(1L, "Milk", 34));
-//        allProducts.add(new Product(2L, "Bread", 41));
         model.addAttribute("products", productService.getAllProducts(pageable));
         return "shop";
     }

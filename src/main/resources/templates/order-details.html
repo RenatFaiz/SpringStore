@@ -43,8 +43,8 @@
         </tr>
         </tbody>
     </table>
-    <div sec:authorize="hasRole('SELLER')">
-        <a class="btn btn-danger" th:href="@{'/remove/'}">Cancel order</a>
+    <div><a class="btn btn-danger"
+            th:href="@{'/orders/order-details/remove/' + ${selectedOrder.id}}">Cancel order</a>
     </div>
 </div>
 </body>

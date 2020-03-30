@@ -1,6 +1,5 @@
 package cosmonaut.controller;
 
-import cosmonaut.entity.Authority;
 import cosmonaut.entity.Order;
 import cosmonaut.entity.User;
 import cosmonaut.service.OrderService;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.security.Principal;
-import java.util.List;
 
 @Controller
 @RequestMapping("/orders")
@@ -22,12 +20,19 @@ public class OrderController {
 
     private OrderService orderService;
 
-    @Autowired
     private UserService userService;
 
     @Autowired
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
+
     private ShoppingCart cart;
 
+    @Autowired
+    public void setCart(ShoppingCart cart) {
+        this.cart = cart;
+    }
 
     @Autowired
     public void setOrderService(OrderService orderService) {
@@ -56,7 +61,7 @@ public class OrderController {
         return "redirect:order-details/" + orderFromItems.getId();
     }
 
-    @GetMapping("/remove/{id}")
+    @GetMapping({"/remove/{id}", "/order-details/remove/{id}"})
     public String deleteOrderById(@PathVariable("id") Long id) {
         orderService.deleteOrderById(id);
         return "redirect:/orders";

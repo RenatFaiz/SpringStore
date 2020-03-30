@@ -2,10 +2,8 @@ package cosmonaut.config;
 
 import cosmonaut.util.DefaultAuthenticationSuccessHandler;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -30,22 +28,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         auth.jdbcAuthentication().dataSource(dataSource);
     }
 
-//    @Bean("authenticationManager")
-//    @Override
-//    public AuthenticationManager authenticationManagerBean() throws Exception {
-//        return super.authenticationManagerBean();
-//    }
-
-//    @Autowired
-//    protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.inMemoryAuthentication()
-//                .withUser("user").password("{noop}us").roles("USER")
-//                .and()
-//                .withUser("admin").password("{noop}ad").roles("ADMIN")
-//                .and()
-//                .withUser("seller").password("{noop}se").roles("SELLER");
-//    }
-
     @Bean
     public AuthenticationSuccessHandler authenticationSuccessHandler() {
         return new DefaultAuthenticationSuccessHandler();
@@ -53,17 +35,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-//                    .antMatchers("/login*").permitAll()
+        http
+                .authorizeRequests()
                 .antMatchers("/orders/**").authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")
                 .loginProcessingUrl("/authenticateTheUser")
                 .successHandler(authenticationSuccessHandler());
-
-//                .loginPage("/login").permitAll()
-//                .loginProcessingUrl("/authenticateTheUser");
-
     }
 }
