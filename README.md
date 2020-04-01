@@ -1,9 +1,6 @@
 # Spring Store 🍃
-https://spring-store-tko.herokuapp.com/
-<!--![](images/Screen2.png)-->
-
+[spring-store-tko.herokuapp.com](https://spring-store-tko.herokuapp.com/)
 <img src="images/Screen2.png" width="400">
-
 ### Прототип интернет-магазина
 
 Страницы: домашняя, магазин, авторизация, заказы.
