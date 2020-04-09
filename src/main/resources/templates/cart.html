@@ -4,8 +4,7 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
 
 <head>
-    <meta charset="utf-8"/>
-
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Spring Store Cart</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
@@ -41,5 +40,6 @@
     <a class="btn btn-success" sec:authorize="isAuthenticated()" th:if="${orderItems.size() > 0}"
        th:href="@{/orders/create_order}">Make order</a>
 </div>
+<div th:replace="footer::footer"></div>
 </body>
 </html>

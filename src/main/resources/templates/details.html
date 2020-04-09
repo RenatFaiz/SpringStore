@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8"/>
-
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Spring Store</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
@@ -19,5 +19,6 @@
     <span th:text="${'id: ' + selectedProduct.id + ', ' + selectedProduct.title +
      ' ' + selectedProduct.price + 'руб.'}"></span>
 </div>
+<div th:replace="footer::footer"></div>
 </body>
 </html>

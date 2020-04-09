@@ -4,10 +4,8 @@
       xmlns:sec="http://www.w3.org/1999/xhtml" lang="en">
 
 <head>
-    <meta charset="utf-8"/>
-
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Spring Store</title>
-
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
@@ -20,12 +18,14 @@
     <h1>Shop</h1>
     <span th:if="${products.getSize() == 0}">Products list is empty</span>
     <table th:if="${products.getSize() > 0}" class="table table-hover">
-        <thead class="thead-dark">
+        <thead class="thead-light">
         <tr>
-            <td>ID</td>
-            <td>Title</td>
-            <td>Price, руб.</td>
-            <td></td>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Price, руб.</th>
+            <th></th>
+            <th></th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
