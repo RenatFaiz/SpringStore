@@ -3,8 +3,18 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 
 <head>
-    <meta charset="utf-8"/>
     <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <style type="text/css">
+        .logos_block {
+            padding: 5px;
+        }
+
+        .logos_block img {
+            height: 40px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+    </style>
     <title>Spring Store</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -14,15 +24,22 @@
 <body>
 <div class="container">
     <div th:replace="~{navigation :: navigation(Home)}"></div>
-    <h1>Spring Store &#127811</h1>
-    <p style="max-width: 800px;">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-    <img src="images/programming.gif" alt="programmer">
+    <h1 style="color: #005139;">Spring Store <span style="color: #457725;">&#127811</span></h1>
+    <p style="text-align: justify;">
+        Simple online store on the Spring framework (Java). In particular, for this project I used Spring Boot, MVC
+        (model-view-controller), Thymeleaf template engine and Spring Security for authentication and access-control.
+        Also, I took Hibernate ORM as a Java Persistence API realization. I used PostgreSQL as a database for this
+        project and Git version control system. My Spring Store application deployed to Heroku cloud application
+        platform.</p>
+    <p><a href="https://github.com/RenatFaiz/SpringStore">View on GitHub</a></p>
+    <div class="logos_block">
+        <img src="images/spring.png" alt="Spring logo">
+        <img src="images/spring_boot_logo.png" alt="Spring Boot logo">
+        <img src="images/html5.gif" alt="HTML5 logo">
+        <img src="images/hibernate_logo.png" alt="Hibernate logo">
+        <img src="images/postgresql-logo.png" alt="PostgreSQL logo">
+        <img src="images/heroku_logo.svg" alt="Heroku logo">
+    </div>
     <div th:replace="footer :: footer"></div>
 </div>
 </body>

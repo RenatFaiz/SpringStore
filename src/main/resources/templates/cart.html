@@ -40,6 +40,5 @@
     <a class="btn btn-success" sec:authorize="isAuthenticated()" th:if="${orderItems.size() > 0}"
        th:href="@{/orders/create_order}">Make order</a>
 </div>
-<div th:replace="footer::footer"></div>
 </body>
 </html>
