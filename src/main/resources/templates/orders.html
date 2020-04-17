@@ -15,7 +15,7 @@
 <body>
 <div class="container">
     <div th:replace="~{navigation :: navigation(Orders)}"></div>
-    <h1>Orders &#127811</h1>
+    <h2>Orders &#127811</h2>
     <span th:if="${orders.size() == 0}">No orders yet..</span>
     <table sec:authorize="isAuthenticated()" th:if="${orders.size() > 0}"
            class="table table-hover">

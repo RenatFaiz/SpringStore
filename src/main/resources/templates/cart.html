@@ -16,7 +16,7 @@
 
 <div class="container">
     <div th:replace="~{navigation :: navigation(Cart)}"></div>
-    <h1>Shopping cart</h1>
+    <h2>Shopping cart</h2>
     <span th:if="${orderItems.size() == 0}">Cart is empty</span>
     <table th:if="${orderItems.size() > 0}" class="table table-hover">
         <thead class="thead-light">

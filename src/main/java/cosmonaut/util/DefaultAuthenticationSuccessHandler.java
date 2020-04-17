@@ -50,35 +50,18 @@ public class DefaultAuthenticationSuccessHandler
     }
 
     protected String determineTargetUrl(Authentication authentication) {
-        boolean isUser = false;
-        boolean isAdmin = false;
-        boolean isSeller = false;
-        Collection<? extends GrantedAuthority> authorities
-                = authentication.getAuthorities();
-        label:
-        for (GrantedAuthority grantedAuthority : authorities) {
+
+        for (GrantedAuthority grantedAuthority : authentication.getAuthorities()) {
             switch (grantedAuthority.getAuthority()) {
                 case "ROLE_USER":
-                    isUser = true;
-                    break label;
+                    return "/shop";
                 case "ROLE_ADMIN":
-                    isAdmin = true;
-                    break label;
+                    return "/index";
                 case "ROLE_SELLER":
-                    isSeller = true;
-                    break label;
+                    return "/orders";
             }
         }
-
-        if (isUser) {
-            return "/shop";
-        } else if (isAdmin) {
-            return "/shop";
-        } else if (isSeller) {
-            return "/orders";
-        } else {
-            throw new IllegalStateException();
-        }
+        return "/login";
     }
 
     protected void clearAuthenticationAttributes(HttpServletRequest request) {
