@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
@@ -27,8 +28,13 @@ public class CartController {
     }
 
     @GetMapping("/add/{id}")
-    public String addToCart(@PathVariable("id") Long id) {
+    public String addToCart(@PathVariable("id") Long id,
+                            @RequestParam(value = "topage", defaultValue = "shop",
+                                    required = false) String query) {
         cart.addProductById(id);
-        return "redirect:/shop";
+        if (query.equals("stayonpage")) {
+            return "redirect:/details/{id}";
+        }
+        return "redirect:/" + query;
     }
 }

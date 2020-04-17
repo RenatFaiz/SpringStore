@@ -18,7 +18,12 @@
     <h2>Details &#127811</h2>
     <span th:text="${'id: ' + selectedProduct.id + ', ' + selectedProduct.title +
      ' ' + selectedProduct.price + 'руб.'}"></span>
-    <p style="margin-top: 10px;"><a class="btn btn-success" th:href="@{'/cart/add/' + ${selectedProduct.id}}">Add to cart</a></p>
+    <p style="margin-top: 10px;">
+        <a class="btn btn-success"
+           th:href="@{'/cart/add/'+ ${selectedProduct.id} + '?topage=stayonpage'}">
+            Add to cart
+        </a>
+    </p>
 </div>
 </body>
 </html>
